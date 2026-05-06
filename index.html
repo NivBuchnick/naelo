@@ -3,149 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naelo - Your Private Journal</title>
+    <title>Naelo — Private Journal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --bg-top: #e0d7ff;
-            --bg-bottom: #f8e1ff;
-            --accent-purple: #9d8df1;
-            --accent-pink: #fbc2eb;
-            --text-main: #4a4a6a;
-            --text-muted: #7a7a9a;
-            --white: #ffffff;
+            --primary: #6b5b95;
+            --secondary: #c67c9e;
+            --accent: #f4c2d4;
+            --dark: #2a2a3a;
+            --light: #f9f7ff;
+            --text-primary: #1f1f2e;
+            --text-secondary: #666680;
+            --border: rgba(107, 91, 149, 0.1);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-main);
-            line-height: 1.6;
-            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
-            min-height: 100vh;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            background: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Atmospheric background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(198, 124, 158, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(107, 91, 149, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 24px;
         }
 
+        /* Header */
         header {
+            padding: 60px 0 80px;
             text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .logo-placeholder {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #b19ef3, #fbc2eb);
-            border-radius: 30px;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Mock logo elements based on user image */
-        .logo-placeholder::before {
-            content: '';
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            position: absolute;
-            top: 20%;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 3.5rem;
             font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
             letter-spacing: -1px;
-            margin: 10px 0;
-            color: #3b3b58;
+            animation: slideUp 0.8s ease-out 0.2s both;
         }
 
         .tagline {
-            font-size: 1.2rem;
-            color: var(--text-muted);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
             font-weight: 300;
+            letter-spacing: 0.5px;
+            animation: slideUp 0.8s ease-out 0.3s both;
         }
 
-        section {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: var(--accent-purple);
-            border-bottom: 2px solid rgba(157, 141, 241, 0.2);
-            padding-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 20px;
-        }
-
-        .privacy-policy {
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        /* Navigation */
+        .nav-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(249, 247, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            margin-bottom: 60px;
         }
 
         .nav-links {
-            text-align: center;
-            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .nav-links a {
-            color: var(--text-main);
+            color: var(--text-primary);
             text-decoration: none;
-            margin: 0 15px;
-            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
             opacity: 0.7;
-            transition: opacity 0.2s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             opacity: 1;
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        section:nth-child(1) { animation-delay: 0.4s; }
+        section:nth-child(2) { animation-delay: 0.5s; }
+        section:nth-child(3) { animation-delay: 0.6s; }
+
+        section:not(.privacy-policy) {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-policy {
+            background: linear-gradient(135deg, rgba(249, 247, 255, 0.8) 0%, rgba(244, 194, 212, 0.05) 100%);
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid var(--border);
+        }
+
+        .privacy-policy p:first-of-type {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        /* Support Section */
+        .support-section {
+            text-align: center;
+        }
+
+        .support-section p {
+            margin-bottom: 24px;
+        }
+
+        .email-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            letter-spacing: 0.3px;
+        }
+
+        .email-link:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 80px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            section:not(.privacy-policy) {
+                padding: 32px;
+            }
+
+            .nav-links {
+                gap: 24px;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            header {
+                padding: 40px 0 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            section:not(.privacy-policy) {
+                padding: 24px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-wrapper {
+                margin-bottom: 40px;
+            }
         }
 
         @media print {
-            body { background: white; }
-            section { box-shadow: none; border: 1px solid #eee; }
+            body::before,
+            body::after,
+            .nav-wrapper {
+                display: none;
+            }
+
+            section {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
+    <nav class="nav-wrapper">
+        <div class="container">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#privacy">Privacy</a>
+                <a href="#support">Support</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <header>
-            <div class="logo-placeholder"></div>
             <h1>Naelo</h1>
             <p class="tagline">Peace of mind in every entry.</p>
         </header>
-
-        <nav class="nav-links">
-            <a href="#about">About</a>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#support">Support</a>
-        </nav>
 
         <section id="about">
             <h2>Sophisticated Reflection</h2>
@@ -157,7 +410,7 @@
             <h2>Privacy Policy</h2>
             <p><strong>Last Updated: May 6, 2026</strong></p>
             <p>At Naelo, we believe your thoughts should be for your eyes only. Our privacy philosophy is simple: we don't want your data, so we don't collect it.</p>
-            
+
             <h3>1. Data Storage</h3>
             <p>All journal entries, images, and settings created within Naelo are stored locally on your device. We do not maintain any cloud servers that store your personal content. If you delete the app without a backup, your data is gone forever—exactly the way a private journal should be.</p>
 
@@ -171,16 +424,15 @@
             <p>Naelo does not share your data with third parties. Your journals are yours alone.</p>
         </section>
 
-        <section id="support">
-            <h2>Support</h2>
-            <p>Have questions or feedback? We'd love to hear from you. You can reach out to our team to help make Naelo the best space for your reflections.</p>
-            <p>Contact us anytime at: <strong>niv.buchnick1@gmail.com</strong></p>
+        <section id="support" class="support-section">
+            <h2>Get in Touch</h2>
+            <p>Have questions or feedback? We'd love to hear from you. Reach out anytime to help make Naelo the best space for your reflections.</p>
+            <a href="mailto:niv.buchnick1@gmail.com" class="email-link">Contact Us</a>
         </section>
 
         <footer>
-            &copy; 2026 Naelo. All rights reserved.
+            <p>&copy; 2026 Naelo. All rights reserved. | Crafted with intention</p>
         </footer>
     </div>
-
 </body>
 </html>
