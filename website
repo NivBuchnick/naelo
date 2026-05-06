@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naelo - Your Private Journal</title>
+    <style>
+        :root {
+            --bg-top: #e0d7ff;
+            --bg-bottom: #f8e1ff;
+            --accent-purple: #9d8df1;
+            --accent-pink: #fbc2eb;
+            --text-main: #4a4a6a;
+            --text-muted: #7a7a9a;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            line-height: 1.6;
+            background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #b19ef3, #fbc2eb);
+            border-radius: 30px;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mock logo elements based on user image */
+        .logo-placeholder::before {
+            content: '';
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 10px 0;
+            color: #3b3b58;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--accent-purple);
+            border-bottom: 2px solid rgba(157, 141, 241, 0.2);
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .privacy-policy {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        @media print {
+            body { background: white; }
+            section { box-shadow: none; border: 1px solid #eee; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo-placeholder"></div>
+            <h1>Naelo</h1>
+            <p class="tagline">Peace of mind in every entry.</p>
+        </header>
+
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#support">Support</a>
+        </nav>
+
+        <section id="about">
+            <h2>Sophisticated Reflection</h2>
+            <p>Naelo is more than just a digital journal; it is a dedicated space for clarity and personal growth. Designed with a minimalist aesthetic and a sophisticated color palette, Naelo transforms the act of daily reflection into a premium experience.</p>
+            <p>Whether you are documenting your goals, practicing gratitude, or simply offloading your thoughts at the end of a long day, Naelo provides the tools to do so with elegance and absolute privacy.</p>
+        </section>
+
+        <section id="privacy" class="privacy-policy">
+            <h2>Privacy Policy</h2>
+            <p><strong>Last Updated: May 6, 2026</strong></p>
+            <p>At Naelo, we believe your thoughts should be for your eyes only. Our privacy philosophy is simple: we don't want your data, so we don't collect it.</p>
+            
+            <h3>1. Data Storage</h3>
+            <p>All journal entries, images, and settings created within Naelo are stored locally on your device. We do not maintain any cloud servers that store your personal content. If you delete the app without a backup, your data is gone forever—exactly the way a private journal should be.</p>
+
+            <h3>2. Biometric Security</h3>
+            <p>When you enable Privacy Lock, Naelo uses Apple's FaceID or TouchID systems. This authentication happens entirely at the system level. Naelo never sees or stores your biometric data; we only receive a "success" or "failure" signal from the operating system.</p>
+
+            <h3>3. No Tracking</h3>
+            <p>We do not use third-party analytics that track your individual behavior or identify you. We believe in a clean, distraction-free environment that respects your digital footprint.</p>
+
+            <h3>4. Third-Party Services</h3>
+            <p>Naelo does not share your data with third parties. Your journals are yours alone.</p>
+        </section>
+
+        <section id="support">
+            <h2>Support</h2>
+            <p>Have questions or feedback? We'd love to hear from you. You can reach out to our team to help make Naelo the best space for your reflections.</p>
+            <p>Contact us anytime at: <strong>support@naelo.app</strong></p>
+        </section>
+
+        <footer>
+            &copy; 2026 Naelo. All rights reserved.
+        </footer>
+    </div>
+
+</body>
+</html>
+index.html
+Displaying index.html.
